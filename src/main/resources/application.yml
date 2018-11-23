@@ -1,8 +1,31 @@
 server:
-  port: 8080
+  port: 8081
 spring:
   datasource:
     username: root
     password: 123456
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/zhaowei
+    url: jdbc:mysql://127.0.0.1:3306/zhaowei?useSSL=false
+    type: com.alibaba.druid.pool.DruidDataSource
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    minIdle: 5
+    validationQuery: SELECT 1 FROM DUAL
+    initialSize: 5
+    maxWait: 60000
+    filters: stat,wall,slf4j
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    testOnBorrow: false
+    testWhileIdle: true
+    minEvictableIdleTimeMillis: 300000
+    timeBetweenEvictionRunsMillis: 60000
+    testOnReturn: false
+    maxActive: 20
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.example.model.bo
+
+source:
+  corePoolSize : 10
+  maxPoolSize : 200
+  queueCapacity : 10
